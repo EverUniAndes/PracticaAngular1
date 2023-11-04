@@ -13,7 +13,7 @@ export class PlantasService {
 
 constructor(private http: HttpClient) { }
 
-getBooks(): Observable<Planta[]> {
+getPlantas(): Observable<Planta[]> {
   return this.http.get<Planta[]>(this.apiUrl);
 }
 
