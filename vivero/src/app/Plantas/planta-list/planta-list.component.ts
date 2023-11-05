@@ -11,17 +11,31 @@ export class PlantaListComponent implements OnInit {
 
 
   ListaPlantas: Array<Planta> = [];
-
+  cantidadInterior: number = 0;
+  cantidadExterior: number = 0;
+  
   constructor(private plantaService: PlantasService) { }
 
-  getListPlantas(): void {
-    this.plantaService.getPlantas().subscribe((ListaPlantas) => {this.ListaPlantas = ListaPlantas}
-
-    )
+  getListPlantas(): void  {
+    this.plantaService.getPlantas().subscribe((ListaPlantas) => {this.ListaPlantas = ListaPlantas})
   }
+
+  getCantidadInterior():void {
+    this.plantaService.getPlantas().subscribe((Datos) => {
+      this.cantidadInterior = Datos.filter((plantas) => plantas.tipo === "Interior").length })
+  }
+
+  getCantidadExterior():void {
+    this.plantaService.getPlantas().subscribe((Datos) => {
+      this.cantidadExterior = Datos.filter((plantas) => plantas.tipo === "Exterior").length })
+  }
+
 
   ngOnInit() {
     this.getListPlantas();
+    this.getCantidadInterior();
+    this.getCantidadExterior();
+
   }
 
 }
